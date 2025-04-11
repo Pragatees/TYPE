@@ -1,0 +1,174 @@
+/* Reset styles to remove default margins and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Full container that takes entire viewport */
+  .full-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .home-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .background-gif {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  
+  .overlay {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .top-section {
+    margin-bottom: 2rem;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    color: #fff;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .title-emoji {
+    font-size: 3rem;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 0.5rem;
+    animation: bounce 2s ease infinite;
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+    color: #f0f0f0;
+    margin-bottom: 2rem;
+  }
+  
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .animated-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .animated-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #2575fc 0%, #6a11cb 100%);
+  }
+  
+  .animated-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .button-emoji {
+    margin-right: 10px;
+    font-size: 1.3rem;
+  }
+  
+  .footer-text {
+    margin-top: 3rem;
+    font-size: 1rem;
+    color: #cccccc;
+    font-style: italic;
+  }
+  
+  .controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 3;
+  }
+  
+  .sound-control {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: white;
+    transition: all 0.3s ease;
+  }
+  
+  .sound-control:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+  }
+  
+  /* Animations */
+  @keyframes glow {
+    from {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    to {
+      text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }

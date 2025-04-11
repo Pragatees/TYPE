@@ -1,0 +1,165 @@
+/* Global reset to prevent default scrollbars */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+/* Rules page container */
+.rules-page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.rules-page .rules-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: url("../../images/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: brightness(70%);
+}
+
+/* Overlay to contain all content */
+.rules-page .overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 0;
+  overflow: hidden;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Title styling */
+.rules-page .rules-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 10px 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+  width: 100%;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Content styling */
+.rules-page .rules-content {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: left;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 2s ease-in-out;
+  flex: 1;
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+/* List styling */
+.rules-page .rules-content ul {
+  list-style-type: none;
+  margin: 10px 0;
+  padding-left: 0;
+}
+
+.rules-page .rules-content li {
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.rules-page .rules-content li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1.2rem;
+  color: #ff6600;
+}
+
+/* Button styling */
+.rules-page .back-button {
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #ff6600;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 10px 0;
+}
+
+.rules-page .back-button:hover {
+  transform: scale(1.1);
+  background-color: #e65c00;
+}
+
+.rules-page .back-button:active {
+  transform: scale(0.95);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rules-page .rules-title {
+    font-size: 2rem;
+  }
+
+  .rules-page .rules-content {
+    font-size: 1rem;
+    max-height: 25vh;
+  }
+
+  .rules-page .back-button {
+    font-size: 1rem;
+    padding: 8px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rules-page .rules-title {
+    font-size: 1.5rem;
+  }
+
+  .rules-page .rules-content {
+    font-size: 0.9rem;
+    max-height: 20vh;
+  }
+
+  .rules-page .back-button {
+    font-size: 0.9rem;
+    padding: 6px 15px;
+  }
+}
