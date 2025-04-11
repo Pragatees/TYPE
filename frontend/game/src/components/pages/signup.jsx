@@ -12,6 +12,13 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+  // Add a new state for password strength
+  const [passwordStrength, setPasswordStrength] = useState({
+    score: 0,
+    message: '',
+    color: ''
+  });
+  
   const history = useHistory();
 
   const bgMusicRef = useRef(new Audio(bgmusic));
@@ -42,12 +49,84 @@ const SignupPage = () => {
     };
   }, []);
 
+  // New function to check password strength
+  const checkPasswordStrength = (password) => {
+    // Initialize score
+    let score = 0;
+    
+    // Check if empty
+    if (password.length === 0) {
+      setPasswordStrength({
+        score: 0,
+        message: '',
+        color: ''
+      });
+      return;
+    }
+    
+    // Check length
+    if (password.length < 6) {
+      score = 1;
+    } else if (password.length < 10) {
+      score += 2;
+    } else {
+      score += 3;
+    }
+    
+    // Check for mixed case
+    if (password.match(/[a-z]/) && password.match(/[A-Z]/)) {
+      score += 1;
+    }
+    
+    // Check for numbers
+    if (password.match(/\d/)) {
+      score += 1;
+    }
+    
+    // Check for special characters
+    if (password.match(/[^a-zA-Z\d]/)) {
+      score += 1;
+    }
+    
+    // Score interpretation
+    let message = '';
+    let color = '';
+    
+    if (score < 3) {
+      message = 'Weak';
+      color = '#e74c3c'; // Red
+    } else if (score < 5) {
+      message = 'Moderate';
+      color = '#f39c12'; // Orange
+    } else {
+      message = 'Strong';
+      color = '#27ae60'; // Green
+    }
+    
+    setPasswordStrength({
+      score,
+      message,
+      color
+    });
+  };
+
+  // Add effect to check password strength whenever password changes
+  useEffect(() => {
+    checkPasswordStrength(password);
+  }, [password]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     buttonClickRef.current.play();
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      return;
+    }
+
+    // Add a minimum strength requirement if desired
+    if (passwordStrength.score < 3) {
+      setError("Please choose a stronger password");
       return;
     }
 
@@ -119,6 +198,37 @@ const SignupPage = () => {
                     style={styles.input}
                     placeholder="Create a password"
                   />
+                  {password && (
+                    <div style={styles.strengthIndicator}>
+                      <div style={{
+                        ...styles.strengthMeter,
+                        width: `${(passwordStrength.score / 6) * 100}%`,
+                        backgroundColor: passwordStrength.color
+                      }}></div>
+                      <span style={{color: passwordStrength.color}}>
+                        {passwordStrength.message}
+                      </span>
+                    </div>
+                  )}
+                  {password && (
+                    <div style={styles.passwordTips}>
+                      <p>Password should contain:</p>
+                      <ul style={styles.tipsList}>
+                        <li style={{color: password.length >= 8 ? '#27ae60' : '#ccc'}}>
+                          At least 8 characters
+                        </li>
+                        <li style={{color: (password.match(/[A-Z]/) && password.match(/[a-z]/)) ? '#27ae60' : '#ccc'}}>
+                          Upper and lowercase letters
+                        </li>
+                        <li style={{color: password.match(/\d/) ? '#27ae60' : '#ccc'}}>
+                          At least one number
+                        </li>
+                        <li style={{color: password.match(/[^a-zA-Z\d]/) ? '#27ae60' : '#ccc'}}>
+                          At least one special character
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
                 <div style={styles.inputGroup}>
                   <label htmlFor="confirmPassword" style={styles.label}>🔐 Confirm Password:</label>
@@ -182,6 +292,7 @@ const styles = {
     boxShadow: '0 8px 20px rgba(0, 0, 0, 0.3)',
     position: 'relative',
     maxHeight: '95vh',
+    overflowY: 'auto',
   },
   box: {
     width: '100%',
@@ -238,6 +349,35 @@ const styles = {
     color: '#000',
     boxSizing: 'border-box',
   },
+  // Add new styles for password strength meter
+  strengthIndicator: {
+    marginTop: '5px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    width: '100%',
+  },
+  strengthMeter: {
+    height: '6px',
+    borderRadius: '3px',
+    width: '0%',
+    transition: 'all 0.3s ease',
+    marginBottom: '5px',
+  },
+  passwordTips: {
+    marginTop: '8px',
+    textAlign: 'left',
+    fontSize: '14px',
+    color: '#666',
+    backgroundColor: '#f9f9f9',
+    padding: '10px',
+    borderRadius: '5px',
+  },
+  tipsList: {
+    marginTop: '5px',
+    paddingLeft: '20px',
+    textAlign: 'left',
+  },
   button: {
     background: 'linear-gradient(45deg, #663399, #9370DB)',
     color: '#fff',
@@ -247,7 +387,7 @@ const styles = {
     borderRadius: '10px',
     cursor: 'pointer',
     transition: '0.3s ease',
-    fontFamily: '"Segoe UI", Arial, sans-serif', // Fixed the fontFamily syntax
+    fontFamily: '"Segoe UI", Arial, sans-serif',
     fontWeight: 'bold',
     boxShadow: '0 4px 10px rgba(102, 51, 153, 0.3)',
     width: '80%',

@@ -144,7 +144,7 @@ const LoginPage = () => {
                 </button>
               </form>
               <p style={styles.text}>
-                Don't have an account? <Link to='/signup' style={styles.link}>✏️ Sign Up</Link>
+                Don't have an account? <Link to='/' style={styles.link}>✏️ Sign Up</Link>
               </p>
             </div>
           </div>
