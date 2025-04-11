@@ -93,49 +93,64 @@ const LoginPage = () => {
     }
   };
 
+  // Global styles for placeholder and focus
+  const globalStyles = `
+    input::placeholder {
+      color: #666;
+      opacity: 1;
+    }
+    input:focus {
+      border-color: #FF5722;
+      box-shadow: 0 0 5px rgba(255, 87, 34, 0.3);
+    }
+  `;
+
   return (
-    <div style={styles.outerContainer} onClick={handlePlayMusic}>
-      <div style={styles.container}>
-        <div style={styles.formContainer}>
-          <div style={styles.box}>
-            <h2 style={styles.title}>✨ Welcome Back ✨</h2>
-            {error && <p style={styles.errorMessage}>⚠️ {error}</p>}
-            <form onSubmit={handleSubmit} style={styles.form}>
-              <div style={styles.inputGroup}>
-                <label htmlFor="username" style={styles.label}>👤 Username:</label>
-                <input
-                  type="text"
-                  id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  style={styles.input}
-                  placeholder="Enter your username"
-                />
-              </div>
-              <div style={styles.inputGroup}>
-                <label htmlFor="password" style={styles.label}>🔒 Password:</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  style={styles.input}
-                  placeholder="Enter your password"
-                />
-              </div>
-              <button type="submit" style={styles.button}>
-                🚪 Login
-              </button>
-            </form>
-            <p style={styles.text}>
-              Don't have an account? <Link to='/signup' style={styles.link}>✏️ Sign Up</Link>
-            </p>
+    <>
+      <style>{globalStyles}</style>
+      <div style={styles.outerContainer} onClick={handlePlayMusic}>
+        <div style={styles.container}>
+          <div style={styles.formContainer}>
+            <div style={styles.box}>
+              <h2 style={styles.title}>✨ Welcome Back ✨</h2>
+              {error && <p style={styles.errorMessage}>⚠️ {error}</p>}
+              <form onSubmit={handleSubmit} style={styles.form}>
+                <div style={styles.inputGroup}>
+                  <label htmlFor="username" style={styles.label}>👤 Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    style={styles.input}
+                    placeholder="Enter your username"
+                  />
+                </div>
+                <div style={styles.inputGroup}>
+                  <label htmlFor="password" style={styles.label}>🔒 Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    style={styles.input}
+                    placeholder="Enter your password"
+                  />
+                </div>
+                <button type="submit" style={styles.button}>
+                  🚪 Login
+                </button>
+              </form>
+              <p style={styles.text}>
+                Don't have an account? <Link to='/signup' style={styles.link}>✏️ Sign Up</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -225,7 +240,8 @@ const styles = {
     outline: 'none',
     fontFamily: '"Segoe UI", Arial, sans-serif',
     transition: '0.3s ease',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 1)', // Fully opaque for clarity
+    color: '#000', // Black text for visibility
     boxSizing: 'border-box',
   },
   button: {

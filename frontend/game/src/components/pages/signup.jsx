@@ -62,41 +62,88 @@ const SignupPage = () => {
     }
   };
 
+  // Global styles for placeholder
+  const globalStyles = `
+    input::placeholder {
+      color: #666;
+      opacity: 1;
+    }
+    input:focus {
+      border-color: #663399;
+      box-shadow: 0 0 5px rgba(102, 51, 153, 0.3);
+    }
+  `;
+
   return (
-    <div style={styles.outerContainer} onClick={handlePlayMusic}>
-      <div style={styles.container}>
-        <div style={styles.formContainer}>
-          <div style={styles.box}>
-            <h2 style={styles.title}>✨ Create Your Account ✨</h2>
-            {error && <p style={styles.errorMessage}>⚠️ {error}</p>}
-            <form onSubmit={handleSubmit} style={styles.form}>
-              <div style={styles.inputGroup}>
-                <label htmlFor="username" style={styles.label}>👤 Username:</label>
-                <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required style={styles.input} placeholder="Enter your username" />
-              </div>
-              <div style={styles.inputGroup}>
-                <label htmlFor="email" style={styles.label}>📧 Email:</label>
-                <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required style={styles.input} placeholder="Enter your email" />
-              </div>
-              <div style={styles.inputGroup}>
-                <label htmlFor="password" style={styles.label}>🔒 Password:</label>
-                <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required style={styles.input} placeholder="Create a password" />
-              </div>
-              <div style={styles.inputGroup}>
-                <label htmlFor="confirmPassword" style={styles.label}>🔐 Confirm Password:</label>
-                <input type="password" id="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required style={styles.input} placeholder="Confirm your password" />
-              </div>
-              <button type="submit" style={styles.button}>
-                🚀 Sign Up
-              </button>
-            </form>
-            <p style={styles.text}>
-              Already have an account? <Link to='/login' style={styles.link}>🔑 Login</Link>
-            </p>
+    <>
+      <style>{globalStyles}</style>
+      <div style={styles.outerContainer} onClick={handlePlayMusic}>
+        <div style={styles.container}>
+          <div style={styles.formContainer}>
+            <div style={styles.box}>
+              <h2 style={styles.title}>✨ Create Your Account ✨</h2>
+              {error && <p style={styles.errorMessage}>⚠️ {error}</p>}
+              <form onSubmit={handleSubmit} style={styles.form}>
+                <div style={styles.inputGroup}>
+                  <label htmlFor="username" style={styles.label}>👤 Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                    style={styles.input}
+                    placeholder="Enter your username"
+                  />
+                </div>
+                <div style={styles.inputGroup}>
+                  <label htmlFor="email" style={styles.label}>📧 Email:</label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    style={styles.input}
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div style={styles.inputGroup}>
+                  <label htmlFor="password" style={styles.label}>🔒 Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    style={styles.input}
+                    placeholder="Create a password"
+                  />
+                </div>
+                <div style={styles.inputGroup}>
+                  <label htmlFor="confirmPassword" style={styles.label}>🔐 Confirm Password:</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    style={styles.input}
+                    placeholder="Confirm your password"
+                  />
+                </div>
+                <button type="submit" style={styles.button}>
+                  🚀 Sign Up
+                </button>
+              </form>
+              <p style={styles.text}>
+                Already have an account? <Link to='/login' style={styles.link}>🔑 Login</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -146,7 +193,7 @@ const styles = {
     fontSize: '28px',
     fontWeight: 'bold',
     marginBottom: '20px',
-    color: '#663399', // Purple instead of blue
+    color: '#663399',
     fontFamily: '"Segoe UI", Arial, sans-serif',
     textShadow: '1px 1px 3px rgba(0,0,0,0.1)',
   },
@@ -187,11 +234,12 @@ const styles = {
     outline: 'none',
     fontFamily: '"Segoe UI", Arial, sans-serif',
     transition: '0.3s ease',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    backgroundColor: 'rgba(255, 255, 255, 1)',
+    color: '#000',
     boxSizing: 'border-box',
   },
   button: {
-    background: 'linear-gradient(45deg, #663399, #9370DB)', // Purple gradient instead of blue
+    background: 'linear-gradient(45deg, #663399, #9370DB)',
     color: '#fff',
     padding: '14px 25px',
     fontSize: '18px',
@@ -199,7 +247,7 @@ const styles = {
     borderRadius: '10px',
     cursor: 'pointer',
     transition: '0.3s ease',
-    fontFamily: '"Segoe UI", Arial, sans-serif',
+    fontFamily: '"Segoe UI", Arial, sans-serif', // Fixed the fontFamily syntax
     fontWeight: 'bold',
     boxShadow: '0 4px 10px rgba(102, 51, 153, 0.3)',
     width: '80%',
@@ -213,7 +261,7 @@ const styles = {
     fontSize: '16px',
   },
   link: {
-    color: '#663399', // Purple instead of blue
+    color: '#663399',
     textDecoration: 'none',
     fontWeight: 'bold',
     transition: '0.2s ease',

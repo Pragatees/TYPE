@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "./components/pages/login";
 import Signup from "./components/pages/signup";
 import Profile from "./components/pages/profile";
-import Home from "./components/pages/Home";
+import Home from "./components/pages/home";
 import HowToPlay from "./components/pages/howtoplay";
 import Rules from "./components/pages/rules";
 import Levels from "./components/pages/levels";
