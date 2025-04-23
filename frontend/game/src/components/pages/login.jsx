@@ -62,7 +62,7 @@ const LoginPage = () => {
 
       console.log("Logging in with:", { trimmedUsername });
 
-      const response = await axios.post('http://localhost:5000/login', {
+      const response = await axios.post('https://type-kqik.onrender.com/login', {
         username: trimmedUsername,
         password: trimmedPassword
       });
